@@ -12,7 +12,8 @@ st.set_page_config(
 
 # Load CSS
 def load_css():
-    css_path = os.path.join("assets", "styles.css")
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    css_path = os.path.join(current_dir, "assets", "styles.css")
     if os.path.exists(css_path):
         with open(css_path) as f:
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
