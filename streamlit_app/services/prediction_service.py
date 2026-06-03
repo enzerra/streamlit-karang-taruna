@@ -16,7 +16,7 @@ from config.settings import settings
 from utils.preprocessing import aggregate_daily_transactions
 
 @st.cache_resource
-def load_lstm_model():
+def load_lstm_model_v2():
     """Loads the pre-trained LSTM model."""
     try:
         if load_model is None:
@@ -31,7 +31,7 @@ def load_lstm_model():
         return None
 
 @st.cache_resource
-def load_data_scaler():
+def load_data_scaler_v2():
     """Loads the pre-trained scaler."""
     try:
         if os.path.exists(settings.SCALER_PATH):
@@ -57,7 +57,7 @@ def prepare_lstm_data(df: pd.DataFrame, time_steps=30):
     if len(daily_df) < time_steps:
         return None, daily_df, False # Not enough data
         
-    scaler = load_data_scaler()
+    scaler = load_data_scaler_v2()
     if scaler is None:
         return None, daily_df, False
         
@@ -99,8 +99,8 @@ def predict_future(days_ahead=30):
         })
         return pred_df, avg_daily * days_ahead
         
-    model = load_lstm_model()
-    scaler = load_data_scaler()
+    model = load_lstm_model_v2()
+    scaler = load_data_scaler_v2()
     
     if model is None or scaler is None:
         # Fallback
