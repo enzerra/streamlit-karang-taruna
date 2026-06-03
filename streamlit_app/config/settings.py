@@ -15,7 +15,9 @@ class Settings:
     PAGE_ICON = "📈"
 
     # Model Configuration
-    MODEL_PATH = os.path.join("models", "model_lstm.keras")
-    SCALER_PATH = os.path.join("models", "scaler.pkl")
+    # Base dir is the directory containing the 'config' folder
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    MODEL_PATH = os.path.join(BASE_DIR, "models", "model_lstm.keras")
+    SCALER_PATH = os.path.join(BASE_DIR, "models", "scaler.pkl")
 
 settings = Settings()
